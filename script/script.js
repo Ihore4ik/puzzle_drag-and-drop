@@ -1,22 +1,28 @@
-const block1 = document.querySelector('.block_1');
-const block2 = document.querySelector('.block_2');
-const items = document.querySelectorAll('.item');
+const blocks = document.querySelectorAll(".block");
+const dragable_items = document.querySelectorAll(".item");
 
+const dragStartHandler = (e) => {
+  e.dataTransfer.setData("id", e.target.id);
+};
+const dragOverHandler = (e) => {
+  e.preventDefault();
+};
+const dropHandler = (e) => {
+  e.preventDefault();
+  let id = e.dataTransfer.getData("id");
+  let dragableElement = document.getElementById(id);
+  let parentDragableElement = dragableElement.parentNode;
+  let replaceableElement = e.currentTarget.firstElementChild;
 
-const dragStartHandler = (e)=>{
-    e.dataTransfer.setData("id", e.target.id);
-}
-const dragOver_handler = (e)=>{
-     e.preventDefault();
-}
-const drop_handler = (e)=>{
-    let itemId = e.dataTransfer.getData("id");
-    e.currentTarget.append(document.getElementById(itemId));
-}
-items.forEach(item=>{
-    item.addEventListener("dragstart",dragStartHandler);
-})
-block1.addEventListener("dragover", dragOver_handler);
-block2.addEventListener("dragover", dragOver_handler);
-block1.addEventListener("drop", drop_handler);
-block2.addEventListener("drop", drop_handler);
+  if (replaceableElement.id !== id) {
+    e.currentTarget.replaceChild(dragableElement, replaceableElement);
+    parentDragableElement.appendChild(replaceableElement);
+  }
+};
+dragable_items.forEach((item) => {
+  item.addEventListener("dragstart", dragStartHandler);
+});
+blocks.forEach((block) => {
+  block.addEventListener("dragover", dragOverHandler);
+  block.addEventListener("drop", dropHandler);
+});
