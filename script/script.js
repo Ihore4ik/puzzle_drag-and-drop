@@ -3,7 +3,7 @@ import {
   dragStartHandler,
   dragOverHandler,
   dragLeaveHandler,
-  dropHandler 
+  dropHandler,
 } from "./event_handlers.js";
 
 const zone = document.querySelector(".zone_1");
