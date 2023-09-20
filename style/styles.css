@@ -29,3 +29,9 @@ body {
   height: 100%;
   
 }
+.dragging{
+  opacity: .1;
+}
+.hovered{
+  border: 1px dashed black;
+}
