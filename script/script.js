@@ -1,5 +1,6 @@
 const blocks = document.querySelectorAll(".block");
-const dragable_items = document.querySelectorAll(".item");
+const dragable_items = document.querySelectorAll("img");
+// const dragable_items = document.querySelectorAll(".item");
 
 const dragStartHandler = (e) => {
   e.dataTransfer.setData("id", e.target.id);
